@@ -9,17 +9,22 @@ public class AccountManager {
     private Account accountTransfer;
 
     public AccountManager(){
-        accountRefill = new Account(++accountNumber);
-        accountTransfer = new Account(++accountNumber);
+        accountNumber++;
+        accountRefill = new Account(accountNumber, new BigDecimal("0") );
+        accountNumber++;
+        accountTransfer = new Account(accountNumber, new BigDecimal("0"));
     }
 
-    public void trans (TransactionEnum transaction, BigDecimal amount){
+    public void transaction(Transaction transaction, BigDecimal amount){
         switch (transaction) {
-            case REFILL:
+            case REFILL: {
                 refill(amount);
                 break;
-            case TRANSFER:
+            }
+            case TRANSFER: {
                 transfer(amount);
+                break;
+            }
         }
     }
 
@@ -28,12 +33,14 @@ public class AccountManager {
     }
 
     private void transfer(BigDecimal amount){
-        if ( accountRefill.getBalance().compareTo(amount) >= 0) {
-            accountRefill.setBalance(accountRefill.getBalance().subtract(amount));
-            accountTransfer.setBalance(accountTransfer.getBalance().add(amount));
-        } else {
+        if ( accountRefill.getBalance().compareTo(amount) < 0) {
             System.out.print("\nThe transaction is cancelled. There is no enough money.");
+            return;
         }
+
+        accountRefill.setBalance(accountRefill.getBalance().subtract(amount));
+        accountTransfer.setBalance(accountTransfer.getBalance().add(amount));
+
     }
 
     public Account getAccountRefill() {

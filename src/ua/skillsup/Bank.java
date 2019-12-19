@@ -8,37 +8,22 @@ public class Bank {
 
         AccountManager accountManager = new AccountManager();
 
-        TransactionEnum transaction;
-        String  amount;
+        process(Transaction.REFILL, "100.00", accountManager);
 
-        transaction = TransactionEnum.REFILL;
-        amount = "100.00";
-        process(transaction, amount, accountManager);
+        process(Transaction.TRANSFER, "200.000", accountManager);
 
-        transaction = TransactionEnum.TRANSFER;
-        amount = "200.000";
-        process(transaction, amount, accountManager);
+        process(Transaction.REFILL, "20.000", accountManager);
 
-        transaction = TransactionEnum.REFILL;
-        amount = "20.000";
-        process(transaction, amount, accountManager);
+        process(Transaction.REFILL, "5.0000", accountManager);
 
-        transaction = TransactionEnum.REFILL;
-        amount = "5.0000";
-        process(transaction, amount, accountManager);
+        process(Transaction.TRANSFER, "100.0000", accountManager);
 
-        transaction = TransactionEnum.TRANSFER;
-        amount = "100.0000";
-        process(transaction, amount, accountManager);
-
-        transaction = TransactionEnum.TRANSFER;
-        amount = "3.0";
-        process(transaction, amount, accountManager);
+        process(Transaction.TRANSFER, "3.0", accountManager);
     }
 
-    private static void process(TransactionEnum transaction, String amount, AccountManager accountManager){
+    private static void process(Transaction transaction, String amount, AccountManager accountManager){
         BigDecimal amountTrans = initAmountTrans(amount);
-        accountManager.trans(transaction, amountTrans);
+        accountManager.transaction(transaction, amountTrans);
         printStateAccount(transaction, amountTrans, accountManager);
     }
 
@@ -46,7 +31,7 @@ public class Bank {
         return new BigDecimal(amount).setScale(2, ROUND_HALF_UP);
     }
 
-    private static void printStateAccount(TransactionEnum transaction, BigDecimal amount, AccountManager accountManager){
+    private static void printStateAccount(Transaction transaction, BigDecimal amount, AccountManager accountManager){
 
         System.out.println("\n____Transaction " + transaction + ". Amount " + amount + ". State of accounts.");
 

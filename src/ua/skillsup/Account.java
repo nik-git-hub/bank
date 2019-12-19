@@ -7,9 +7,9 @@ public class Account {
     private long number;
     private BigDecimal balance;
 
-    public Account(long number){
+    public Account(long number, BigDecimal balance){
         this.number = number;
-        this.balance = new BigDecimal("0");
+        this.balance = balance;
     }
 
     public long getNumber() {
