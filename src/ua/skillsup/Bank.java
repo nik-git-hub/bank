@@ -24,14 +24,14 @@ public class Bank {
     private static void process(Transaction transaction, String amount, AccountManager accountManager){
         BigDecimal amountTrans = initAmountTrans(amount);
         accountManager.transaction(transaction, amountTrans);
-        printStateAccount(transaction, amountTrans, accountManager);
+        printAccountState(transaction, amountTrans, accountManager);
     }
 
     private static BigDecimal initAmountTrans(String amount) {
         return new BigDecimal(amount).setScale(2, ROUND_HALF_UP);
     }
 
-    private static void printStateAccount(Transaction transaction, BigDecimal amount, AccountManager accountManager){
+    private static void printAccountState(Transaction transaction, BigDecimal amount, AccountManager accountManager){
 
         System.out.println("\n____Transaction " + transaction + ". Amount " + amount + ". State of accounts.");
 
