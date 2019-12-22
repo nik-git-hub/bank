@@ -33,12 +33,15 @@ public class Bank {
 
     private static void printAccountState(Transaction transaction, BigDecimal amount, AccountManager accountManager){
 
-        System.out.println("\n____Transaction " + transaction + ". Amount " + amount + ". State of accounts.");
+        System.out.printf("\n" +
+                "Transaction <%-8s> ; amount %-7s\n", transaction, amount.toString());
+        System.out.println("State of accounts");
+        System.out.printf("%-8s account %-13d ; Balance %-7s", "REFILL",
+                accountManager.getAccountRefill().getNumber(),
+                accountManager.getAccountRefill().getBalance().toString());
 
-        System.out.println("Refill account " + accountManager.getAccountRefill().getNumber()
-                + ". Balance " + accountManager.getAccountRefill().getBalance());
-
-        System.out.println("Transfer account " + accountManager.getAccountTransfer().getNumber()
-                + ". Balance " + accountManager.getAccountTransfer().getBalance());
+        System.out.printf("\n%-8s account %-13d ; Balance %-7s \n", "TRANSFER",
+                accountManager.getAccountTransfer().getNumber(),
+                accountManager.getAccountTransfer().getBalance().toString());
     }
 }
