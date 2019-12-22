@@ -4,15 +4,12 @@ import java.math.BigDecimal;
 
 public class AccountManager {
 
-    private long accountNumber = 0;
     private Account accountRefill;
     private Account accountTransfer;
 
     public AccountManager(){
-        accountNumber++;
-        accountRefill = new Account(accountNumber, new BigDecimal("0") );
-        accountNumber++;
-        accountTransfer = new Account(accountNumber, new BigDecimal("0"));
+        accountRefill = new Account(createAccountNumber(), new BigDecimal("0") );
+        accountTransfer = new Account(createAccountNumber(), new BigDecimal("0"));
     }
 
     public void transaction(Transaction transaction, BigDecimal amount){
@@ -49,6 +46,10 @@ public class AccountManager {
 
     public Account getAccountTransfer() {
         return accountTransfer;
+    }
+
+    private long createAccountNumber() {
+        return System.currentTimeMillis();
     }
 
 }
